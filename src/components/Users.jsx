@@ -23,6 +23,7 @@ const Users = () => {
     try {
       const { data } = await axios.get(BASE_URL);
       console.log(data.results);
+      setGetUsers(data.results)
       const person = data.results[0];
       const { phone, email } = person;
       const {
@@ -107,6 +108,14 @@ const Users = () => {
           </button>
         </div>
       </div>
+      {getUsers.map(({ id, title, picture, name }) => {
+        return(
+          <div key={id.value}>
+            <img alt="random user" src={picture.large} />
+            <h1>{name.title} <strong>{name.first} {name.last}</strong></h1>
+          </div>
+        )
+      })}
     </section>
   );
 };
