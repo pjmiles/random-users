@@ -18,6 +18,11 @@ const Users = () => {
 
   const BASE_URL = "https://randomuser.me/api/?results=50";
   const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
+  const [pageNumber, setPageNumber] = useState(0)
+
+  const usersPerPage = 10
+  const pagesVisited = pageNumber * usersPerPage
+
 
   const fectchUser = async () => {
     try {
@@ -25,6 +30,7 @@ const Users = () => {
       console.log(data.results);
       setGetUsers(data.results)
       const person = data.results[0];
+
       const { phone, email } = person;
       const {
         login: { password },
@@ -56,10 +62,6 @@ const Users = () => {
     }
   };
 
-  useEffect(() => {
-    fectchUser();
-  }, []);
-
   const handleValue = (e) => {
     if (e.target.classList.contains("icon")) {
       const newValue = e.target.dataset.label;
@@ -68,6 +70,24 @@ const Users = () => {
     }
   };
 
+// mapping through getUsers state
+  const displayUsers = getUsers.slice(pagesVisited, pagesVisited + usersPerPage)
+  .map(({ id, title, picture, name }) => {
+    return(
+      <div key={id.value}>
+        <img alt="random user" src={picture.large} />
+        <h1>{name.title} <strong>{name.first} {name.last}</strong></h1>
+      </div>
+    )
+  })
+// page count
+  const pageCount = Math.ceil(getUsers.length / usersPerPage)
+
+  useEffect(() => {
+    fectchUser();
+  }, []);
+
+ 
   return (
     <section>
       <div className="container">
@@ -108,14 +128,8 @@ const Users = () => {
           </button>
         </div>
       </div>
-      {getUsers.map(({ id, title, picture, name }) => {
-        return(
-          <div key={id.value}>
-            <img alt="random user" src={picture.large} />
-            <h1>{name.title} <strong>{name.first} {name.last}</strong></h1>
-          </div>
-        )
-      })}
+      
+      {!loading ? displayUsers : "Loading..."}
     </section>
   );
 };
