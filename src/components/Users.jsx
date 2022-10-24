@@ -15,10 +15,10 @@ const Users = () => {
   const [person, setPerson] = useState(null);
   const [title, setTitle] = useState("name");
   const [value, setValue] = useState("random person");
+  const [pageNumber, setPageNumber] = useState(0)
 
   const BASE_URL = "https://randomuser.me/api/?results=50";
   const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
-  const [pageNumber, setPageNumber] = useState(0)
 
   const usersPerPage = 10
   const pagesVisited = pageNumber * usersPerPage
@@ -62,6 +62,10 @@ const Users = () => {
     }
   };
 
+  useEffect(() => {
+    fectchUser();
+  }, []);
+
   const handleValue = (e) => {
     if (e.target.classList.contains("icon")) {
       const newValue = e.target.dataset.label;
@@ -82,10 +86,9 @@ const Users = () => {
   })
 // page count
   const pageCount = Math.ceil(getUsers.length / usersPerPage)
-
-  useEffect(() => {
-    fectchUser();
-  }, []);
+  const changePage = ({ selected }) => {
+    setPageNumber(selected)
+  }
 
  
   return (
