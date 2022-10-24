@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import {
   FaEnvelopeOpen,
   FaUser,
@@ -15,20 +16,19 @@ const Users = () => {
   const [person, setPerson] = useState(null);
   const [title, setTitle] = useState("name");
   const [value, setValue] = useState("random person");
-  const [pageNumber, setPageNumber] = useState(0)
+  const [pageNumber, setPageNumber] = useState(0);
 
   const BASE_URL = "https://randomuser.me/api/?results=50";
   const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
-  const usersPerPage = 10
-  const pagesVisited = pageNumber * usersPerPage
-
+  const usersPerPage = 10;
+  const pagesVisited = pageNumber * usersPerPage;
 
   const fectchUser = async () => {
     try {
       const { data } = await axios.get(BASE_URL);
       console.log(data.results);
-      setGetUsers(data.results)
+      setGetUsers(data.results);
       const person = data.results[0];
 
       const { phone, email } = person;
@@ -74,23 +74,42 @@ const Users = () => {
     }
   };
 
-// mapping through getUsers state
-  const displayUsers = getUsers.slice(pagesVisited, pagesVisited + usersPerPage)
-  .map(({ id, title, picture, name }) => {
-    return(
-      <div key={id.value}>
-        <img alt="random user" src={picture.large} />
-        <h1>{name.title} <strong>{name.first} {name.last}</strong></h1>
-      </div>
-    )
-  })
-// page count
-  const pageCount = Math.ceil(getUsers.length / usersPerPage)
-  const changePage = ({ selected }) => {
-    setPageNumber(selected)
-  }
+  // mapping through getUsers state
+  const displayUsers = getUsers
+    .slice(pagesVisited, pagesVisited + usersPerPage)
+    .map(({ id, picture, name, icon }) => {
+      return (
+        <div className="users-container">
+          <div key={id.value}>
+            <img
+              alt="random user"
+              src={picture.large}
+              onMouseOver={handleValue}
+            />
+            <h1>
+              {name.title}{" "}
+              <strong>
+                {name.first} {name.last}
+              </strong>
+            </h1>
+            <button
+              className="icon"
+              data-label="name"
+              onMouseOver={handleValue}
+            >
+              <FaUser />
+            </button>
+          </div>
+        </div>
+      );
+    });
 
- 
+  // page count
+  const pageCount = Math.ceil(getUsers.length / usersPerPage);
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
   return (
     <section>
       <div className="container">
@@ -131,8 +150,19 @@ const Users = () => {
           </button>
         </div>
       </div>
-      
+
       {!loading ? displayUsers : "Loading..."}
+      <ReactPaginate
+        previousLabel={"Prev"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        containerClassName={"paginationBttns"}
+        previousLinkClassName={"prevBttn"}
+        nextLinkClassName={"nextBttn"}
+        disabledClassName={"paginationDisabled"}
+        activeClassName={"paginationActive"}
+      />
     </section>
   );
 };
