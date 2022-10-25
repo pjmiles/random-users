@@ -1,17 +1,29 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+    --blue-color: #2b2eff;
 }
 
 section {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: auto;
+    /* flex-direction: column; */
 }
 
 .users-container {
     background-color: aqua;
+    padding: 15px;
+    margin: 0 10px;
 }
 
 /* buttons */
@@ -27,18 +39,18 @@ section {
     padding: 10px;
     margin: 8px;
     border-radius: 5px;
-    border:  1px solid #2b2eff;
-    color: #2b2eff;
+    border:  1px solid var(--blue-color);
+    color: var(--blue-color);
     cursor: pointer;
 }
 
 
 .paginationBttns a:hover {
     color: white;
-    background-color: #2b2eff;
+    background-color: var(--blue-color);
 }
 
 .paginationActive a {
     color: white;
-    background-color: #2b2eff;
+    background-color: var(--blue-color);
 }

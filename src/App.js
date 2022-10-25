@@ -1,12 +1,26 @@
-import { Route, Routes } from 'react-router-dom';
-import Users from './components/Users';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Users from "./components/Users";
+import NavBar from "./components/NavBar";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
-    <Routes className="App">
-      <Route path="/" element={<Users />}/>
-    </Routes>
+    <BrowserRouter>
+      <Routes className="App">
+        <Route
+          index
+          element={
+            <>
+              <NavBar />
+              <Users />
+            </>
+          }
+        />
+      <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
