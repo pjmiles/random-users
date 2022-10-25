@@ -1,12 +1,25 @@
-import { Route, Routes } from 'react-router-dom';
-import Users from './components/Users';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Users from "./components/Users";
+import NavBar from "./components/NavBar";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
 
 function App() {
   return (
-    <Routes className="App">
-      <Route path="/" element={<Users />}/>
-    </Routes>
+    <BrowserRouter>
+      <Routes className="App">
+        <Route path="/" element={<NavBar />} />
+        <Route
+          index
+          element={
+            <>
+              <NavBar />
+              <Users />
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
