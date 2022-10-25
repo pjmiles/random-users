@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom"
-import '../styles/NavBar.css'
+import '../styles/Navbar.css'
 
 const NavBar = () => {
   return (
@@ -9,7 +9,7 @@ const NavBar = () => {
         </div>
         <ul>
             <li><NavLink to="/">display</NavLink></li>
-            <li><NavLink to="/all-pages"></NavLink></li>
+            <li><NavLink to="/all-pages">all</NavLink></li>
         </ul>
         <Outlet />
     </nav>
