@@ -3,12 +3,12 @@ import Users from "./components/Users";
 import NavBar from "./components/NavBar";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes className="App">
-        <Route path="/" element={<NavBar />} />
         <Route
           index
           element={
@@ -18,6 +18,7 @@ function App() {
             </>
           }
         />
+      <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
