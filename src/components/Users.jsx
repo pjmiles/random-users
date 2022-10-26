@@ -80,11 +80,12 @@ const Users = () => {
     .map(({ id, picture, name, icon }) => {
       return (
         <div className="users-container">
-          <div key={id.value}>
+          <div className="image-container" key={id.value}>
             <img
               alt="random user"
               src={picture.large}
               onMouseOver={handleValue}
+              className="user-image"
             />
             <h1>
               {name.title}{" "}
