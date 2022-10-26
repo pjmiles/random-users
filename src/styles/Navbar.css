@@ -3,10 +3,19 @@ nav {
     justify-content: space-between;
     width: 100%;
     padding: 20px;
+    box-shadow: 13px 0px 20px rgba(0, 0, 0, 0.04);;
 }
 
 ul {
     display: flex;
     list-style-type: none;
     gap: 15px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkgoldenrod;
 }
