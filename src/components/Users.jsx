@@ -112,59 +112,76 @@ const Users = () => {
   };
 
   return (
-    <section>
-      <div className="container">
-        <img
-          src={(person && person.image) || defaultImage}
-          alt="random user"
-          className="user-image"
-        />
-        <p className="user-title">
-          My {title} is <strong>{value}</strong>
-        </p>
-        <div className="values-list">
-          <button className="icon" data-label="name" onMouseOver={handleValue}>
-            <FaUser />
-          </button>
-          <button className="icon" data-label="email" onMouseOver={handleValue}>
-            <FaEnvelopeOpen />
-          </button>
-          <button className="icon" data-label="age" onMouseOver={handleValue}>
-            <FaCalendarTimes />
-          </button>
-          <button
-            className="icon"
-            data-label="street"
-            onMouseOver={handleValue}
-          >
-            <FaMap />
-          </button>
-          <button className="icon" data-label="phone" onMouseOver={handleValue}>
-            <FaPhone />
-          </button>
-          <button
-            className="icon"
-            data-label="password"
-            onMouseOver={handleValue}
-          >
-            <FaLock />
-          </button>
+    <>
+      <section>
+        <div className="container">
+          <img
+            src={(person && person.image) || defaultImage}
+            alt="random user"
+            className="user-image"
+          />
+          <p className="user-title">
+            My {title} is <strong>{value}</strong>
+          </p>
+          <div className="values-list">
+            <button
+              className="icon"
+              data-label="name"
+              onMouseOver={handleValue}
+            >
+              <FaUser />
+            </button>
+            <button
+              className="icon"
+              data-label="email"
+              onMouseOver={handleValue}
+            >
+              <FaEnvelopeOpen />
+            </button>
+            <button className="icon" data-label="age" onMouseOver={handleValue}>
+              <FaCalendarTimes />
+            </button>
+            <button
+              className="icon"
+              data-label="street"
+              onMouseOver={handleValue}
+            >
+              <FaMap />
+            </button>
+            <button
+              className="icon"
+              data-label="phone"
+              onMouseOver={handleValue}
+            >
+              <FaPhone />
+            </button>
+            <button
+              className="icon"
+              data-label="password"
+              onMouseOver={handleValue}
+            >
+              <FaLock />
+            </button>
+          </div>
         </div>
-      </div>
 
-      {!loading ? displayUsers : "Loading..."}
-      <ReactPaginate
-        previousLabel={"Prev"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={changePage}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"prevBttn"}
-        nextLinkClassName={"nextBttn"}
-        disabledClassName={"paginationDisabled"}
-        activeClassName={"paginationActive"}
-      />
-    </section>
+        {!loading ? displayUsers : "Loading..."}
+      </section>
+      
+      <div className="buttons-conatiner">
+        <ReactPaginate
+          previousLabel={"Prev"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={"paginationBttns"}
+          previousLinkClassName={"prevBttn"}
+          nextLinkClassName={"nextBttn"}
+          disabledClassName={"paginationDisabled"}
+          activeClassName={"paginationActive"}
+        />
+      </div>
+    </>
   );
 };
 
