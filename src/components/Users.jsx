@@ -9,6 +9,7 @@ import {
   FaLock,
 } from "react-icons/fa";
 import axios from "axios";
+import ErrorBoundary from "./ErrorBoundary";
 
 const Users = () => {
   const [getUsers, setGetUsers] = useState([]);
@@ -112,7 +113,7 @@ const Users = () => {
   };
 
   return (
-    <>
+    <ErrorBoundary>
       <section>
         <div className="container">
           <img
@@ -181,7 +182,7 @@ const Users = () => {
           activeClassName={"paginationActive"}
         />
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 
